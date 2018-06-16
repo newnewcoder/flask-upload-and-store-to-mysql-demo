@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+   </head>
+   <body>
+    <form method="post" enctype=multipart/form-data>
+        {{ form.hidden_tag() }}
+           <div>
+              <label> upload image (jpg、png、gif) </label>
+              <br/>
+              {{ form.file }}
+              <br/>
+              <span style="color:red;">
+              {% if form.file.errors %}
+                  {% for error in form.file.errors %}
+                      {{ error }}
+                  {% endfor %}
+              {% endif %}
+              </span>
+           </div>
+            <div>
+               <button type="submit"> upload </button>
+            </div>
+        </div>
+     </form>
+     <br/>image from mysql:
+     <br/>
+     {% if img_base64 %}
+        <img style="width: 100px;height: 100px;" src="data:image/png;base64,{{ img_base64 }}">
+     {% else %}
+         <p>no data</p>
+     {% endif %}
+   </body>
+</html>
